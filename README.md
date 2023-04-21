@@ -7,7 +7,7 @@ Manuscript: Annotating and integrating multi-modal single-cell and spatial omics
 ### 1. Brief description
 MASIv2 is an extended version of MASI, which utlizes marker genes and graph structure to annotate and integrate multi-modal single-cell and spatial omics data.
 
-![alt text](https://github.com/hayatlab/masiv2/blob/main/MASIv2/MASIv2_Figure%201.jpg?raw=true)
+![alt text](https://github.com/hayatlab/masiv2/blob/main/MASIv2/MASIv2_Figure1.jpg?raw=true)
 
 ### 2. Install requirement packages
     pip install scanpy
