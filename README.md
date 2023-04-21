@@ -10,7 +10,7 @@ MASIv2 is an extended version of MASI, which utlizes marker genes and graph stru
 ![alt text](https://github.com/hayatlab/masiv2/blob/main/MASIv2/MASIv2_Figure1.jpg?raw=true)
 
 ### 2. Install requirement packages
-    pip install scanpy networkx python-louvain
+    pip install scanpy networkx python-louvain scikit-learn scipy
     ##MASIv2 also requires dgl library. Please install dgl (https://www.dgl.ai/pages/start.html) according your system
     
 ### 3. Usage
