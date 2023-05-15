@@ -15,7 +15,7 @@ MASIv2 is an extended version of MASI, which utlizes marker genes and graph stru
     ##Please install dgl according to your system (https://www.dgl.ai/pages/start.html).
     
 ### 3. Usage
-    import MASI as masi
+    import MASIv2 as masi
     
 ### 4. Reproduce results in manuscript
 Please see tutorials at https://github.com/hayatlab/masiv2/tree/main/tutorial
