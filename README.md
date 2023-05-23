@@ -14,11 +14,8 @@ MASIv2 is an extended version of MASI, which utlizes marker genes and graph stru
     ##MASIv2 also requires dgl library.
     ##Please install dgl according to your system (https://www.dgl.ai/pages/start.html).
     
-### 3. Usage
-    import MASIv2 as masi
-    
-### 4. Reproduce results in manuscript
+### 3. Tutorial
 Please see tutorials at https://github.com/hayatlab/MASIv2/tree/main/tutorial
 
-### 5. Citation
+### 4. Citation
 Xu et al. "MASIv2 enables standardization and integration of multi-modal single-cell and spatial omics data with one general framework". <a href="https://www.biorxiv.org/content/10.1101/2023.05.15.540808v1">bioRxiv</a>
