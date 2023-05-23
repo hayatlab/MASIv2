@@ -18,4 +18,4 @@ MASIv2 is an extended version of MASI, which utlizes marker genes and graph stru
 Please see tutorials at https://github.com/hayatlab/MASIv2/tree/main/tutorial
 
 ### 4. Citation
-Xu et al. "MASIv2 enables standardization and integration of multi-modal single-cell and spatial omics data with one general framework". <a href="https://www.biorxiv.org/content/10.1101/2023.05.15.540808v1">bioRxiv</a>
+Xu, Y. & Hayat, S. "MASIv2 enables standardization and integration of multi-modal single-cell and spatial omics data with one general framework". <a href="https://www.biorxiv.org/content/10.1101/2023.05.15.540808v1">bioRxiv</a>
