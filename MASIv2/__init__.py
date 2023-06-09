@@ -495,7 +495,7 @@ def train(g, model, epochs, pseudoy):
 '''
 Parallel computing
 '''
-def parallelAGN_noref(
+def parallel_noref(
         ad=None, scores=None, labels=None, feat=None, epochs=200, batch_size=50000, t1=1.0, temp=1.0
 ):
     
@@ -555,7 +555,7 @@ def parallelAGN_noref(
         
     return merged, all_weights
 
-def parallelAGN(
+def parallel(
         ad=None, scores=None, labels=None, feat=None, marker_dim=50, epochs=200,
         batch_size=50000, t1=15.0, t2=1.0, temp=1.0, ref_center=None,
         res=1.0, key_node_metric='degree centrality'
