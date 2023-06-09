@@ -2,8 +2,6 @@
 
 MASIv2: marker-assisted standardization and integration for multi-modal single-cell and spatial omics data
 
-Manuscript: MASIv2 enables standardization and integration of multi-modal single-cell and spatial omics data with one general framework
-
 ### 1. Brief description
 MASIv2 is an extended version of MASI, which utlizes marker genes and graph structure to annotate and integrate multi-modal single-cell and spatial omics data.
 
