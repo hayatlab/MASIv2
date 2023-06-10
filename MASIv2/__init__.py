@@ -42,7 +42,7 @@ def gene2cell(
     # TF-IDF transformation
     X = ad.X.copy()
     if scipy.sparse.issparse(X):
-        X = X.todense()
+        X = np.asarray(X.todense())
     
     if if_tfidf:
         tf_transformer = TfidfTransformer(use_idf=True).fit(X)
@@ -131,7 +131,7 @@ def gene2mat(
     # TF-IDF transformation
     X = ad.X.copy()
     if scipy.sparse.issparse(X):
-        X = X.todense()
+        X = np.asarray(X.todense())
     
     if if_tfidf:
         tf_transformer = TfidfTransformer(use_idf=True).fit(X)
