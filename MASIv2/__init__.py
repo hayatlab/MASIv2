@@ -37,7 +37,7 @@ from torchcontrib.optim import SWA
 # -----------------------------------------------------------------------------
 # main functions
 def gene2cell(
-        ad=None, cell_markers=None, use_weight=False, thresh=0.5, if_tfidf=True, if_thresh=True, use_knn=False
+        ad=None, cell_markers=None, use_weight=False, thresh=0.5, if_tfidf=True, if_thresh=True
 ):
     # TF-IDF transformation
     X = ad.X.copy()
@@ -64,7 +64,8 @@ def gene2cell(
                 marker_index += 1
                 if i in ad.var.index:
                     if if_thresh:
-                        expr95 = np.percentile(X[:, ad.var.index == i], 95)
+                        x = np.asarray(X[:, ad.var.index == i])
+                        expr95 = np.percentile(x, 95)
                         thresh = thresh * expr95
                         l = np.array(X[:, ad.var.index == i])
                         l[X[:, ad.var.index == i] <= thresh] = 0
@@ -88,7 +89,8 @@ def gene2cell(
             n = np.zeros((X.shape[0]))
             for i in v:
                 if i in ad.var.index:
-                    expr95 = np.percentile(X[:, ad.var.index == i], 95)
+                    x = np.asarray(X[:, ad.var.index == i])
+                    expr95 = np.percentile(x, 95)
                     thresh = thresh * expr95
                     l = np.array(X[:, ad.var.index == i])
                     l[X[:, ad.var.index == i] <= thresh] = 0
@@ -99,41 +101,26 @@ def gene2cell(
             celltype_size[k] = sums
             exprsed[k] = n.reshape(X.shape[0])        
     
-    if use_knn:  # not used in final method
-        
-        ad.obsm['X_score']=labels.values
-        subsample = ad[ad.obs['source'] == 'reference']
-        subsample = downsample_to_smallest_category(subsample, 'cell_type', min_cells=500, 
-                                                    keep_small_categories=True)  # default 500
-        neigh = KNeighborsClassifier(n_neighbors=5, weights='distance')
-        neigh.fit(subsample.obsm['X_score'], subsample.obs['cell_type'])
-        new_labels = neigh.predict_proba(ad.obsm['X_score'])
-        new_labels = pd.DataFrame(new_labels)
-        new_labels.columns = neigh.classes_
-        
-        labels = labels.reindex(sorted(labels.columns), axis=1)
-        new_labels = new_labels.reindex(sorted(new_labels.columns), axis=1)
     
-    else:
-        assess1 = np.argmax((labels*exprsed).values,axis=1)
-        vals1 = 0
-        for k,v in collections.Counter(assess1).items():
-            if v >= 5:
-                vals1 += 1
-                            
-        assess1 = vals1
+    assess1 = np.argmax((labels*exprsed).values,axis=1)
+    vals1 = 0
+    for k,v in collections.Counter(assess1).items():
+        if v >= 5:
+            vals1 += 1
+            
+    assess1 = vals1
     
-        assess2 = np.argmax((labels).values, axis=1)
-        vals2 = 0
-        for k,v in collections.Counter(assess2).items():
-            if v >= 5:
-                vals2 += 1
-                       
-        assess2 = vals2
-    
-        assess = [assess1, assess2]
-    
-        new_labels = [labels*exprsed, labels][assess.index(max(assess))]
+    assess2 = np.argmax((labels).values, axis=1)
+    vals2 = 0
+    for k,v in collections.Counter(assess2).items():
+        if v >= 5:
+            vals2 += 1
+            
+    assess2 = vals2
+
+    assess = [assess1, assess2]
+
+    new_labels = [labels*exprsed, labels][assess.index(max(assess))]
     
     print(labels.shape)
     return labels, new_labels
@@ -161,7 +148,8 @@ def gene2mat(
         b2 = 0
         for i in v:
             if i in ad.var.index:
-                expr95 = np.percentile(X[:, ad.var.index == i], 95)
+                x = np.asarray(X[:, ad.var.index == i])
+                expr95 = np.percentile(x, 95)
                 thresh = thresh * expr95
                 l = np.array(X[:, ad.var.index == i])
                 if if_thresh:
@@ -495,7 +483,7 @@ def train(g, model, epochs, pseudoy):
 '''
 Parallel computing
 '''
-def parallel_noref(
+def parallelAGN_noref(
         ad=None, scores=None, labels=None, feat=None, epochs=200, batch_size=50000, t1=1.0, temp=1.0
 ):
     
@@ -555,7 +543,7 @@ def parallel_noref(
         
     return merged, all_weights
 
-def parallel(
+def parallelAGN(
         ad=None, scores=None, labels=None, feat=None, marker_dim=50, epochs=200,
         batch_size=50000, t1=15.0, t2=1.0, temp=1.0, ref_center=None,
         res=1.0, key_node_metric='degree centrality'
